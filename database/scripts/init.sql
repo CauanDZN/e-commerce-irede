@@ -9,10 +9,10 @@ CREATE TABLE IF NOT EXISTS usuarios (
 -- Tabela de itens
 CREATE TABLE IF NOT EXISTS itens (
     id SERIAL PRIMARY KEY,
-    id_u INT REFERENCES usuarios(id) NOT NULL,
-    id_p INT NOT NULL,
-    id_v INT REFERENCES vendas(id) NOT NULL,
-    qtd INT NOT NULL,
+    id_usuario INT REFERENCES usuarios(id) NOT NULL,
+    id_produto INT REFERENCES produtos(id) NOT NULL,
+    id_venda INT REFERENCES vendas(id) NOT NULL,
+    quantidade INT NOT NULL,
     preco NUMERIC(10, 2) NOT NULL
 );
 
@@ -20,9 +20,9 @@ CREATE TABLE IF NOT EXISTS itens (
 CREATE TABLE IF NOT EXISTS produtos (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    qtd INT NOT NULL,
+    quantidade INT NOT NULL,
     preco NUMERIC(10, 2) NOT NULL,
-    imagem VARCHAR(255)
+    imagem TEXT
 );
 
 -- Tabela de vendas

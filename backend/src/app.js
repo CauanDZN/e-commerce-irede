@@ -7,4 +7,4 @@ app.use(express.json())
 
 app.use('/persons', personsRouter)
 
-app.listen(3000, () => console.log('Tá de pé!'))
+app.listen(5000, () => console.log('Tá de pé!'))

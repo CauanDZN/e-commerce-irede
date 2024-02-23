@@ -8,11 +8,11 @@ export default function SignIn() {
     const {setUser} = useContext(UserContext)
 
     const[userInput, setUserInput]=useState({email:"", password:""})
-    const userTeste = {email:"darlan.mendes@irede.org.br", password:"123456"}
+    const userTeste = {email:"cauanvictor0325@gmail.com", password:"123456"}
 
     function testeLogin(){
         if(userInput.email === userTeste.email && userInput.password === userTeste.password){
-           setUser({email:userInput.email, name:"Darlan Mendes", id:1233, avatar:"https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png"})
+           setUser({email:userInput.email, name:"Cauan Victor", id:123, avatar:"https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG.png"})
            window.location.href="/"
           
         }else{
