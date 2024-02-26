@@ -17,7 +17,6 @@ import ProductDetailed from "./pages/ProductDetailed"
 function App() {
   const [isAuth, setIsAuth] = useState(!!useContext(UserContext))
 
-
   return (
     <div className=" flex flex-col items-center bg-blue-900 text-zinc-50 min-h-screen overflow-hidden">
       <UserProvider>
