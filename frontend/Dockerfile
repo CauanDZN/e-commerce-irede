@@ -1,19 +1,15 @@
-FROM node:latest AS build
+FROM node:latest as build
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY . .
 
 RUN npm install
 
-COPY . .
-
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginx:latest
 
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
