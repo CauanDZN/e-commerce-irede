@@ -15,7 +15,7 @@ export default function NavBarMobile({showMob, setShowMob}) {
                         <Link key={route.id} to={route.path}
                             className={`text-xs p-3 rounded-md font-semibold
                         ${route.path === location.pathname ? "text-orange-500 bg-slate-100" : "text-stone-500 bg-white"}`}
-                        >{route.tittle}
+                        >{route.title}
                         </Link>
                     ))}
                 </ul>

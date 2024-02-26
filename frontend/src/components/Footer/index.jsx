@@ -3,17 +3,17 @@ import Logo from "../../assets/logo-e-rede.png"
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 function LeftInformation() {
     const infosPagina = [
-        { id: 1, tittle: "Sobre o E-Rede Store", url: "/sobre" },
-        { id: 2, tittle: "Segurança", url: "/segurança" },
-        { id: 3, tittle: "Lista de desejos", url: "/lista-de-desejos" },
-        { id: 4, tittle: "Trabalhe conosco", url: "/trabalhe-conosco" },
+        { id: 1, title: "Sobre o E-Rede Store", url: "/sobre" },
+        { id: 2, title: "Segurança", url: "/segurança" },
+        { id: 3, title: "Lista de desejos", url: "/lista-de-desejos" },
+        { id: 4, title: "Trabalhe conosco", url: "/trabalhe-conosco" },
     ]
     return (
         <ul className="font-semibold text-[10px] min-w-32">
             <p className="pb-[14px]">Informações</p>
             {infosPagina.map((info) => (
                 <li key={info.id} className="pl-[2px] pb-2">
-                    <Link to={info.url} className="text-white font-light">{info.tittle}</Link>
+                    <Link to={info.url} className="text-white font-light">{info.title}</Link>
                 </li>
             ))}
 
@@ -22,17 +22,17 @@ function LeftInformation() {
 }
 function RightInformation() {
     const infosPagina = [
-        { id: 1, tittle: "Tênis", url: "/categoria/tenis" },
-        { id: 2, tittle: "Camiseta", url: "/categoria/camiseta" },
-        { id: 3, tittle: "Acessórios", url: "/categoria/acessorios" },
-        { id: 4, tittle: "Esportivo", url: "/categoria/esportivo" },
+        { id: 1, title: "Tênis", url: "/categoria/tenis" },
+        { id: 2, title: "Camiseta", url: "/categoria/camiseta" },
+        { id: 3, title: "Acessórios", url: "/categoria/acessorios" },
+        { id: 4, title: "Esportivo", url: "/categoria/esportivo" },
     ]
     return (
         <ul className="font-semibold text-[10px] min-w-32">
             <p className="pb-[14px] ">Informações</p>
             {infosPagina.map((info) => (
                 <li key={info.id} className="pl-[2px] pb-2">
-                    <Link to={info.url} className="text-white font-light">{info.tittle}</Link>
+                    <Link to={info.url} className="text-white font-light">{info.title}</Link>
                 </li>
             ))}
 
