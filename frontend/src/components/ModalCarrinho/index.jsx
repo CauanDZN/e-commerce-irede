@@ -17,7 +17,7 @@ export default function ModalCarrinho({ onClose }) {
       let productInfo = products?.find((item) => item.id === product.product_id);
       if (productInfo) {
         listCart.push({ ...productInfo, quantidade: product.quantidade });
-        total += product.quantidade * parseFloat(productInfo.price.replace(",", "."));
+        total += product.quantidade * parseFloat(productInfo.preco.replace(",", "."));
       }
     });
   }
@@ -52,11 +52,11 @@ export default function ModalCarrinho({ onClose }) {
       {listCart.length > 0 ? (
         listCart.map((item) => (
           <div key={item.id} className="flex gap-4 pr-4 pt-4">
-            <img src={item.img} alt={item.title} className="w-20 h-[70px]" />
+            <img src={item.imagem} alt={item.nome} className="w-20 h-[70px]" />
             <div className="flex flex-col justify-center">
-              <h1 className="text-[14px] font-semibold">{item.title}</h1>
-              <span className="text-[10px] text-stone-500">{item.category}</span>
-              <span className="text-xs font-semibold py-2">R$ {item.price}</span>
+              <h1 className="text-[14px] font-semibold">{item.nome}</h1>
+              <span className="text-[10px] text-stone-500">{item.categoria}</span>
+              <span className="text-xs font-semibold py-2">R$ {item.preco}</span>
               <span className="text-xs">Quantidade: {item.quantidade}</span>
             </div>
           </div>

@@ -5,6 +5,8 @@ services:
     build: ./frontend
     ports:
       - "80:80"
+    networks:
+      - ecommerce_network
 
   backend:
     build: ./backend
@@ -12,13 +14,21 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    networks:
+      - ecommerce_network
 
   db:
-    image: postgres
+    build: ./database
     restart: always
     environment:
+      POSTGRES_DB: irede
       POSTGRES_USER: cauan
       POSTGRES_PASSWORD: cauan
-      POSTGRES_DB: irede
     ports:
       - "5432:5432"
+    networks:
+      - ecommerce_network
+
+networks:
+  ecommerce_network:
+    driver: bridge

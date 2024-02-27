@@ -1,20 +1,31 @@
-import { createContext, useState } from "react";
-import tenis from "../../assets/tenis.webp"
+import { createContext, useState, useEffect } from "react";
 
-export const ProductContext = createContext(null)
+export const ProductContext = createContext(null);
 
-export const ProductProvider=({children})=>{
-    const [products, setProducts]=useState([
-        { id: 1, title: "Nike Air Surf", img: tenis, category: "Tênis", price: "220,00" },
-        { id: 2, title: "Nike Air Surf", img: tenis, category: "Tênis", price: "220,00" },
-        { id: 3, title: "Nike Air Surf", img: tenis, category: "Tênis", price: "220,00" },
-        { id: 4, title: "Nike Air Surf", img: tenis, category: "Tênis", price: "220,00" },
-        { id: 5, title: "Nike Air Surf", img: tenis, category: "Tênis", price: "220,00" },
-        { id: 6, title: "Nike Air Surf", img: tenis, category: "Tênis", price: "220,00" },
-    ])
-    return(
-        <ProductContext.Provider value={{products, setProducts}}>
+export const ProductProvider = ({ children }) => {
+    const [products, setProducts] = useState([]);
+    
+    const fetchProducts = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/produtos');
+            if (!response.ok) {
+                throw new Error('Não foi possível obter os produtos');
+            }
+            const data = await response.json();
+            setProducts(data);
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    return (
+        <ProductContext.Provider value={{ products, setProducts }}>
             {children}
         </ProductContext.Provider>
-    )
-}
+    );
+};

@@ -52,20 +52,24 @@ function Card({ product }) {
   return (
     <div className="shadow-sm w-36 h-52 md:w-44 md:h-64 rounded-md bg-white">
       <img
-        src={product.img}
+        src={product.imagem}
         alt="card produto"
         className="h-24 md:h-32 w-44 object-cover"
       />
       <div className="px-3 py-2">
-        <h1 className="text-blue-900 font-bold">{product.title}</h1>
-        <span className="text-stone-500">{product.category}</span>
-        <h3 className="text-orange-500 font-semibold">R$ {product.price}</h3>
-        <button
-          className="bg-blue-900 w-20 h-6 rounded-md text-center text-[12px]"
-          onClick={() => handleCart(product)}
-        >
-          Comprar
-        </button>
+        <h1 className="text-blue-900 font-bold">{product.nome}</h1>
+        <span className="text-stone-500">{product.categoria}</span>
+        <h3 className="text-orange-500 font-semibold">R$ {product.preco}</h3>
+        {product.quantidade === 0 ? (
+          <p className="text-red-500">Indisponível</p>
+        ) : (
+          <button
+            className="bg-blue-900 w-20 h-6 rounded-md text-center text-[12px]"
+            onClick={() => handleCart(product)}
+          >
+            Comprar
+          </button>
+        )}
       </div>
     </div>
   );
