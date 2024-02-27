@@ -16,7 +16,7 @@ BEGIN
         CREATE TABLE produtos (
             id SERIAL PRIMARY KEY,
             nome VARCHAR(100) NOT NULL,
-            categoria VARCHAR(100) NOT NULL, -- Adicione a coluna de categoria
+            categoria VARCHAR(100) NOT NULL,
             quantidade INT NOT NULL,
             preco NUMERIC(10, 2) NOT NULL,
             imagem TEXT
