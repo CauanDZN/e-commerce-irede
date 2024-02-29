@@ -15,7 +15,7 @@ function Buttons() {
   const { user } = useContext(UserContext) || { user: false };
   const { cart } = useContext(CartContext);
   const [totalItemsCart, setTotalItemsCart] = useState(0);
-  const [showModal, setShowModal] = useState(false); // State para controlar a visibilidade do modal
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     let total = 0;
@@ -45,20 +45,17 @@ function Buttons() {
         </>
       )}
       <div className="flex items-center justify-center">
-        {/* Botão separado para abrir o modal */}
         <button className="peer absolute" onClick={() => setShowModal(true)}>
           <MdOutlineShoppingCart className="text-white text-2xl " />
         </button>
 
-        {/* Contador de itens no carrinho */}
         {totalItemsCart > 0 && (
           <div className="h-2 w-2 flex justify-center items-center rounded-full relative -top-4 -right-2 bg-red-500 p-3 ">
             {totalItemsCart}{" "}
           </div>
         )}
 
-        {/* Modal */}
-        {showModal && <ModalCarrinho onClose={() => setShowModal(false)} />} {/* Passa uma função para fechar o modal */}
+        {showModal && <ModalCarrinho onClose={() => setShowModal(false)} />}
       </div>
     </div>
   );

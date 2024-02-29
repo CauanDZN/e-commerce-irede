@@ -55,6 +55,22 @@ app.post('/vendas', async (req, res) => {
     }
 });
 
+app.get('/usuarios', async (req, res) => {
+    const { email, senha } = req.body;
+    try {
+        const user = await pool.query('SELECT * FROM usuarios WHERE email = $1 AND senha = $2', [email, senha]);
+        if (user.rows.length > 0) {
+            res.json(user.rows[0]);
+        } else {
+            res.status(401).send('Email ou senha incorretos');
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+
 app.post('/vendas/:idVenda/itens', async (req, res) => {
     const { id_produto, quantidade, preco } = req.body;
     const { idVenda } = req.params;
