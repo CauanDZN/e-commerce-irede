@@ -33,6 +33,16 @@ app.get('/produtos', async (req, res) => {
     }
 });
 
+app.get('/categorias', async (req, res) => {
+    try {
+        const data = await pool.query('SELECT * FROM categorias');
+        res.status(200).send(data.rows);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
 app.post('/usuarios', async (req, res) => {
     const { nome, email, senha } = req.body;
     try {
