@@ -2,9 +2,9 @@
   "name": "aula08",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "node app.js"
   },
   "keywords": [],
   "author": "",

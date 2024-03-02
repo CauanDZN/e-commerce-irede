@@ -7,7 +7,7 @@ export const ProductProvider = ({ children }) => {
     
     const fetchProducts = async () => {
         try {
-            const response = await fetch('http://localhost:3000/produtos');
+            const response = await fetch('http://localhost:3000/products');
             if (!response.ok) {
                 throw new Error('Não foi possível obter os produtos');
             }
