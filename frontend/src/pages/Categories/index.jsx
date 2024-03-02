@@ -13,9 +13,9 @@ export default function Categories() {
         <div>
         <h1>Categorias</h1>
         <ul>
-            {categories.map((category) => (
-            <li key={category.id}>{category.name}</li>
-            ))}
+            {categories.map((category) => {
+                <li key={category.id}>{category.nome}</li>
+            })}
         </ul>
         </div>
     );
