@@ -1,8 +1,21 @@
-import { useContext } from "react";
-import { UserContext } from "../../context/userContext"
+import React, { useContext } from "react";
+import { UserContext } from "../../context/userContext";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function UserGreeting({ user }) {
   const { setUser } = useContext(UserContext);
+
+  const handleLogout = () => {
+    const toastId = 'logout-toast';
+    toast.dismiss(toastId);
+
+    toast("Logout efetuado com sucesso", {
+      toastId: toastId,
+    });
+    
+    setUser(null);
+  };
 
   return (
     <div className="flex items-center justify-center gap-5">
@@ -13,9 +26,7 @@ export function UserGreeting({ user }) {
       />
       <h1 className="hidden lg:block">Olá, {user.nome}</h1>
       <button
-        onClick={() => {
-          setUser(null);
-        }}
+        onClick={handleLogout}
         className="hidden lg:block"
       >
         Sair

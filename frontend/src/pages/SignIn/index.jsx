@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import imgLogo from "../../assets/logo-e-rede.png";
 import { UserContext } from "../../context/userContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignIn() {
     const navigate = useNavigate();
@@ -23,13 +25,11 @@ export default function SignIn() {
                 setUser(data.user);
                 navigate("/");
             } else {
-                alert("Erro ao tentar se logar");
+                toast.error("Erro ao tentar se logar");
             }
-        }
-        
-        catch (error) {
+        } catch (error) {
             console.error('Erro ao fazer login:', error);
-            alert("Erro ao tentar se logar");
+            toast.error("Erro ao tentar se logar");
         }
     };
 
@@ -77,6 +77,7 @@ export default function SignIn() {
                     </Link>
                 </form>
             </section>
+            <ToastContainer />
         </main>
     )
 }

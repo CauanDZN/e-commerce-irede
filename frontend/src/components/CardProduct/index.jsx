@@ -18,7 +18,7 @@ export function CardProduct({ product }) {
         </div>
         <div className="flex justify-between items-center mt-2">
           <h3 className="text-lg font-semibold text-orange-500">R$ {product.preco}</h3>
-          {product.quantidade === 0 ? (
+          {product.quantidade <= 0 ? (
             <p className="text-sm text-red-500">Indisponível</p>
           ) : null}
         </div>

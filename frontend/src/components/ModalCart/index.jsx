@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/cartContext";
 import { ProductContext } from "../../context/productContext";
+import { UserContext } from "../../context/userContext";
 
 export default function ModalCart({ onClose }) {
   const navigate = useNavigate();
   const { cart, setCart } = useContext(CartContext);
   const { products } = useContext(ProductContext);
+  const { user } = useContext(UserContext);
   const modalRef = useRef(null);
 
   let listCart = [];
@@ -41,11 +43,31 @@ export default function ModalCart({ onClose }) {
     onClose();
   };
 
-  const handleFinalizarCompra = () => {
-    setCart({ products: [] });
-    navigate("/");
-    onClose();
-  };
+  const handleFinalizarCompra = async () => {
+    localStorage.setItem('cartItems', JSON.stringify(listCart));
+    try {
+      await fetch('http://localhost:3000/sales', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          data: new Date().toISOString().split('T')[0],
+          items: listCart.map(item => ({
+            id_usuario: user.id,
+            id_produto: item.id,
+            quantidade: item.quantidade,
+            preco: item.preco
+          }))
+        })
+      });
+      setCart({ products: [] });
+      navigate("/");
+    } catch (error) {
+      console.error('Erro ao finalizar compra:', error);
+      toast.error("Erro ao finalizar compra");
+    }
+  };  
 
   return (
     <div className="bg-zinc-50 text-black w-72 p-7 rounded-lg absolute top-2 right-2 z-50 shadow" ref={modalRef}>

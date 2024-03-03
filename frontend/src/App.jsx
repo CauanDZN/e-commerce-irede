@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import MyOrders from "./pages/MyOrders";
@@ -13,6 +13,8 @@ import { UserProvider } from "./context/userContext";
 import { CartProvider } from "./context/cartContext";
 import { ProductProvider } from "./context/productContext";
 import ProductDetailed from "./pages/ProductDetailed";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -36,6 +38,7 @@ function App() {
             <Footer />
           </ProductProvider>
         </CartProvider>
+        <ToastContainer stacked />
       </div>
     </UserProvider>
   );

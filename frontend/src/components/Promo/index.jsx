@@ -17,7 +17,7 @@ export function Promo() {
         className="hidden md:flex w-full"
       />
       <Link
-        to="/promo"
+        to="/produtos/3"
         className="bg-orange-500 absolute bottom-10 md:right-10 lg:right-30 xl:right-60 2xl:-120 w-[331px] md:w-80 text-center h-16 rounded-md flex items-center justify-center text-xl"
       >
         Aproveitar Oferta
