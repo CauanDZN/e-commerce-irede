@@ -5,7 +5,8 @@ BEGIN
             id SERIAL PRIMARY KEY,
             nome VARCHAR(100) NOT NULL,
             email VARCHAR(100) UNIQUE NOT NULL,
-            senha VARCHAR(100) NOT NULL
+            senha_hash VARCHAR(100) NOT NULL,
+            avatar TEXT
         );
     END IF;
 END $$;
@@ -58,10 +59,17 @@ BEGIN
     END IF;
 END $$;
 
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+INSERT INTO usuarios (nome, email, senha_hash, avatar) VALUES
+    ('Cauan', 'cauan@gmail.com', crypt('123456', gen_salt('bf', 8)), 'https://github.com/CauanDZN.png'),
+    ('Darlan', 'darlan@gmail.com', crypt('123456', gen_salt('bf', 8)), 'https://github.com/DarlanMendes.png'),
+    ('Carlos', 'carlos@gmail.com', crypt('123456', gen_salt('bf', 8)), 'https://media.licdn.com/dms/image/D4D03AQEyKzEOtkP6Yw/profile-displayphoto-shrink_800_800/0/1687389340081?e=1715212800&v=beta&t=5b5MQeexixVprhgqVJLA3bCc2vKi9hmTiYr88BxwbYs');
+
 INSERT INTO categorias (nome) VALUES
-    ('Vestuário'),
-    ('Calçado'),
-    ('Acessório');
+    ('Roupas'),
+    ('Calçados'),
+    ('Acessórios');
 
 INSERT INTO produtos (nome, categoria, quantidade, preco, imagem) VALUES
     ('Camiseta JavaScript', 1, 10, 25.00, 'https://cdn.awsli.com.br/600x450/608/608801/produto/128299601/2f03ec2890.jpg'),

@@ -99,7 +99,7 @@ export default function Footer() {
                     <hr className="mt-4  px-6" />
                     <span className="mt-4 text-[10px] text-center">2024 IREDE | Francisco Cauan Victor</span>
                 </footer>
-                : <>teste</>
+                : <></>
             }
         </>
 

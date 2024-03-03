@@ -4,9 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install
-
-RUN npm install express pg cors
+RUN npm install express pg cors bcrypt jsonwebtoken
 
 EXPOSE 3000
 

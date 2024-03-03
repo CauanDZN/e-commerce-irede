@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/cartContext";
 import { ProductContext } from "../../context/productContext";
 
-export default function ModalCarrinho({ onClose }) {
+export default function ModalCart({ onClose }) {
   const navigate = useNavigate();
   const { cart, setCart } = useContext(CartContext);
   const { products } = useContext(ProductContext);

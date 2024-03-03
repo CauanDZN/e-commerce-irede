@@ -22,7 +22,7 @@ export default function NavBarMobile({showMob, setShowMob}) {
 
                 
                     {user ? <div className="text-blue-900 px-4 h-8 border-t-[1px] rounded-b-md border-stone-500 focus:bg-slate-100"
-                    onClick={()=>setUser(null)}
+                    onClick={() => setUser(null)}
                     >
                         Sair
                     </div> :
