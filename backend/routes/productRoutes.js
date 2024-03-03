@@ -4,7 +4,17 @@ const pool = require('../db');
 
 router.get('/', async (req, res) => {
     try {
-        const data = await pool.query('SELECT * FROM produtos');
+        const data = await pool.query('SELECT p.*, c.nome AS categoria_nome FROM produtos p INNER JOIN categorias c ON p.categoria = c.id');
+        res.status(200).send(data.rows);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/highlighteds', async (req, res) => {
+    try {
+        const data = await pool.query('SELECT p.*, c.nome AS categoria_nome FROM produtos p INNER JOIN categorias c ON p.categoria = c.id WHERE p.destaque = true');
         res.status(200).send(data.rows);
     } catch (err) {
         console.log(err);

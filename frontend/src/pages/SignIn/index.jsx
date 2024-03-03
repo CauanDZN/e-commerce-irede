@@ -21,7 +21,6 @@ export default function SignIn() {
             if (response.ok) {
                 const data = await response.json();
                 setUser(data.user);
-                console.log(data);
                 navigate("/");
             } else {
                 alert("Erro ao tentar se logar");

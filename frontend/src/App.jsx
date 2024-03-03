@@ -12,6 +12,7 @@ import SignUp from "./pages/SignUp";
 import { UserProvider } from "./context/userContext";
 import { CartProvider } from "./context/cartContext";
 import { ProductProvider } from "./context/productContext";
+import ProductDetailed from "./pages/ProductDetailed";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/meus-pedidos" element={<MyOrders />} />
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/produtos/:id" element={<ProductDetailed />} />
               </Routes>
             </div>
             <Footer />

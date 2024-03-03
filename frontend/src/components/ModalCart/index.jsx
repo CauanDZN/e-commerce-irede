@@ -37,12 +37,13 @@ export default function ModalCart({ onClose }) {
 
   const handleEsvaziar = () => {
     setCart({ products: [] });
-    navigate("/categorias");
+    navigate("/produtos");
     onClose();
   };
 
   const handleFinalizarCompra = () => {
     setCart({ products: [] });
+    navigate("/");
     onClose();
   };
 
