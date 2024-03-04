@@ -44,7 +44,6 @@ export default function ModalCart({ onClose }) {
   };
 
   const handleFinalizarCompra = async () => {
-    localStorage.setItem('cartItems', JSON.stringify(listCart));
     try {
       await fetch('http://localhost:3000/sales', {
         method: 'POST',
@@ -78,7 +77,7 @@ export default function ModalCart({ onClose }) {
             <img src={item.imagem} alt={item.nome} className="w-20 h-[70px]" />
             <div className="flex flex-col justify-center">
               <h1 className="text-[14px] font-semibold">{item.nome}</h1>
-              <span className="text-[10px] text-stone-500">{item.categoria}</span>
+              <span className="text-[10px] text-stone-500">{item.categoria_nome}</span>
               <span className="text-xs font-semibold py-2">R$ {item.preco}</span>
               <span className="text-xs">Quantidade: {item.quantidade}</span>
             </div>
