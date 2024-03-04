@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { CardCategory } from "../../components/CardCategory";
+import { api } from "../../api";
 
 export default function Categories() {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        async function fetchCategories() {
-            try {
-                const response = await fetch("http://localhost:3000/products/categories");
-                const data = await response.json();
-                setCategories(data);
-            } catch (error) {
-                console.error("Erro ao buscar categorias:", error);
-            }
-        }
-
-        fetchCategories();
+        api.get.Categories().then((data) => setCategories(data));
     }, []);
 
     return (
