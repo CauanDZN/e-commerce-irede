@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import imgLogo from "../../assets/logo-e-rede.png";
 import { UserContext } from "../../context/userContext";
 import { ToastContainer, toast } from 'react-toastify';
+import { jwtDecode } from "jwt-decode";
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignIn() {
@@ -22,7 +23,9 @@ export default function SignIn() {
 
             if (response.ok) {
                 const data = await response.json();
-                setUser(data.user);
+                const decoded = jwtDecode(data.token);
+                localStorage.setItem("token", data.token);
+                setUser(decoded);
                 navigate("/");
             } else {
                 toast.error("Erro ao tentar se logar");

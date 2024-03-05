@@ -43,7 +43,7 @@ BEGIN
         CREATE TABLE vendas (
             id SERIAL PRIMARY KEY,
             data DATE NOT NULL,
-            status VARCHAR(50) NOT NULL
+            status VARCHAR(50) DEFAULT 'Pendente'
         );
     END IF;
 END $$;

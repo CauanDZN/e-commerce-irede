@@ -9,6 +9,7 @@ export default function ModalCart({ onClose }) {
   const { cart, setCart } = useContext(CartContext);
   const { products } = useContext(ProductContext);
   const { user } = useContext(UserContext);
+  const token = localStorage.getItem("token");
   const modalRef = useRef(null);
 
   let listCart = [];
@@ -48,7 +49,8 @@ export default function ModalCart({ onClose }) {
       const response = await fetch('http://localhost:3000/sales', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
           items: listCart.map(item => ({
@@ -60,7 +62,6 @@ export default function ModalCart({ onClose }) {
         })
       });
   
-      // Verificar se a requisição foi bem-sucedida
       if (response.ok) {
         const data = await response.json();
         const saleId = data.saleId;

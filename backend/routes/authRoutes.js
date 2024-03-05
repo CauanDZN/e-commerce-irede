@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const pool = require('../db');
+const jwt = require('jsonwebtoken');
 
 router.post('/login', async (req, res) => {
     const { email, senha } = req.body;
@@ -15,7 +16,8 @@ router.post('/login', async (req, res) => {
 
             if (senhaCorreta) {
                 delete user.senha_hash;
-                res.status(200).json({ message: 'Login bem-sucedido', user });
+                const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1h' });
+                res.status(200).json({ message: 'Login bem-sucedido', token });
             } else {
                 res.status(401).json({ message: 'Credenciais inválidas' });
             }

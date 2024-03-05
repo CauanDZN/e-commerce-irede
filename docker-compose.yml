@@ -10,14 +10,14 @@ services:
   #   volumes:
   #     - ./nginx.conf:/etc/nginx/conf.d/default.conf
 
-  backend:
-    build: ./backend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-    networks:
-      - ecommerce_network
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - ecommerce_network
 
   db:
     build: ./database

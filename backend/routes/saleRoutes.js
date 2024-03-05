@@ -1,40 +1,39 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db');
+const jwt = require('jsonwebtoken');
 
 router.post('/', async (req, res) => {
     const { items } = req.body;
+    const tokenWithBearer = req.headers.authorization;
+
+    if (!tokenWithBearer) {
+        return res.status(401).json({"message": "Token não encontrado"});
+    }
+
+    const split = tokenWithBearer.split(' ');
+    const token = split[1];
 
     try {
-        const date = new Date();
-        const saleId = await createSale(date);
-        await updateProductsAndInsertItems(items, saleId);
-        res.status(201).send({ saleId });
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const saleId = await createSale(items, decoded);
+        return res.status(201).json({ saleId });
     } catch (err) {
         console.error(err);
+        if (err.name === 'JsonWebTokenError') {
+            return res.status(401).json({"message": "Token inválido"});
+        }
         res.sendStatus(500);
     }
 });
 
-const createSale = async (date) => {
+const createSale = async (items, decoded) => {
     const client = await pool.connect();
     try {
         await client.query('BEGIN');
-        const newSale = await client.query('INSERT INTO vendas (data, status) VALUES ($1, $2) RETURNING id', [date, 'Em andamento']);
-        await client.query('COMMIT');
-        return newSale.rows[0].id;
-    } catch (err) {
-        await client.query('ROLLBACK');
-        throw err;
-    } finally {
-        client.release();
-    }
-};
+        const newSale = await client.query('INSERT INTO vendas (data) VALUES ($1) RETURNING id', ['NOW()']);
+        const idSale = newSale.rows[0].id;
 
-const updateProductsAndInsertItems = async (items, saleId) => {
-    const client = await pool.connect();
-    try {
-        await client.query('BEGIN');
         for (const item of items) {
             const product = await getProduct(client, item.id_produto);
             if (!product) {
@@ -44,9 +43,10 @@ const updateProductsAndInsertItems = async (items, saleId) => {
                 throw new Error(`Quantidade insuficiente em estoque para o produto com ID ${item.id_produto}`);
             }
             await updateProductQuantity(client, item.quantidade, item.id_produto);
-            await insertItem(client, item.id_usuario, item.id_produto, item.quantidade, item.preco, saleId);
+            await insertItem(client, decoded.id, item.id_produto, item.quantidade, item.preco, idSale);
         }
         await client.query('COMMIT');
+        return idSale;
     } catch (err) {
         await client.query('ROLLBACK');
         throw err;
