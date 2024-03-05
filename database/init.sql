@@ -42,7 +42,7 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'vendas') THEN
         CREATE TABLE vendas (
             id SERIAL PRIMARY KEY,
-            data DATE NOT NULL,
+            data DATE NOT NULL DEFAULT NOW(),
             status VARCHAR(50) DEFAULT 'Pendente'
         );
     END IF;

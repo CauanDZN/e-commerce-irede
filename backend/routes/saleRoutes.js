@@ -31,7 +31,7 @@ const createSale = async (items, decoded) => {
     const client = await pool.connect();
     try {
         await client.query('BEGIN');
-        const newSale = await client.query('INSERT INTO vendas (data) VALUES ($1) RETURNING id', ['NOW()']);
+        const newSale = await client.query('INSERT INTO vendas DEFAULT VALUES RETURNING id');
         const idSale = newSale.rows[0].id;
 
         for (const item of items) {
