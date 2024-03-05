@@ -1,79 +1,9 @@
-import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
-import Logo from "../../assets/logo-e-rede.png";
-import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { ProductContext } from "../../context/productContext";
-
-function LeftInformation() {
-  const infosPagina = [
-    { id: 1, title: "Sobre o E-Rede Store", url: "/sobre" },
-    { id: 2, title: "Segurança", url: "/segurança" },
-    { id: 3, title: "Lista de desejos", url: "/lista-de-desejos" },
-    { id: 4, title: "Trabalhe conosco", url: "/trabalhe-conosco" },
-  ];
-
-  return (
-    <ul className="font-semibold text-[10px] min-w-32">
-      <p className="pb-[14px]">Informações</p>
-      {infosPagina.map((info) => (
-        <li key={info.id} className="pl-[2px] pb-2">
-          <Link to={info.url} className="text-white font-light">
-            {info.title}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function RightInformation() {
-  const { products } = useContext(ProductContext);
-  const categories = [...new Set(products.map((product) => product.categoria_nome))];
-
-  return (
-    <ul className="font-semibold text-[10px] min-w-32">
-      <p className="pb-[14px] ">Categorias</p>
-      {categories.map((category, index) => (
-        <li key={index} className="pl-[2px] pb-2">
-          <Link to={`/produtos?categoria=${category}`} className="text-white font-light">
-            {category}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function LogoFooter() {
-  return (
-    <div className="flex flex-col gap-5 pb-5">
-      <div className="flex gap-5">
-        <img src={Logo} alt="" className="h-7" />
-        <section className="text-[10px]">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis necessitatibus repellat,
-          voluptatem! Nobis, ab!Perspiciatis necessitatibus Perspiciatis necessitatibus
-        </section>
-      </div>
-
-      <section className="flex text-base gap-6">
-        <FaFacebook />
-        <FaInstagram />
-        <FaWhatsapp />
-      </section>
-    </div>
-  );
-}
-
-function LocationFooter() {
-  return (
-    <div className="text-[10px]">
-      <h1 className=" font-semibold py-[14px]">Localização</h1>
-      <a href="https://g.co/kgs/9Nv6bKD" className="font-regular pb-2" target="_blank" rel="noopener noreferrer">
-        Av. Treze de Maio, 1116, Bairro de Fátima, Fortaleza-CE
-      </a>
-    </div>
-  );
-}
+import React from "react";
+import { useLocation } from "react-router-dom";
+import { LogoFooter } from "../LogoFooter";
+import { LeftInformation } from "../LeftInformation";
+import { RightInformation } from "../RightInformation";
+import { LocationFooter } from "../LocationFooter";
 
 export default function Footer() {
   const location = useLocation();
@@ -100,7 +30,7 @@ export default function Footer() {
         </div>
       </div>
       <hr className="mt-4  px-6" />
-      <span className="mt-4 text-[10px] text-center">2024 IREDE | Francisco Cauan Victor</span>
+      <span className="mt-4 text-[10px] text-center">2024 | IREDE | Francisco Cauan Victor</span>
     </footer>
   );
 }
