@@ -42,7 +42,8 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'vendas') THEN
         CREATE TABLE vendas (
             id SERIAL PRIMARY KEY,
-            data DATE NOT NULL
+            data DATE NOT NULL,
+            status VARCHAR(50) NOT NULL
         );
     END IF;
 END $$;
@@ -78,7 +79,7 @@ INSERT INTO produtos (nome, categoria, quantidade, preco, imagem, destaque) VALU
     ('Calça Jogger', 1, 5, 50.00, 'https://img.irroba.com.br/fit-in/600x600/filters:fill(fff):quality(80)/w2steaoe/catalog/produtos-1/calca-moletom/masculino/preta/cm6000-pos01.jpg', true),
     ('Tênis Nike', 2, 15, 120.00, 'https://static.kapiva.com.br/public/kapiva/imagens/produtos/tenis-nike-revolution-6-next-nature-preto-branco-3306.png', false),
     ('Bermuda Jeans', 1, 8, 70.00, 'https://d3vnyi5j6ba1mc.cloudfront.net/Custom/Content/Products/16/20/1620524_bermuda-jeans-masculina-relax-34601712_l1_638267526375253651.jpg', false),
-    ('Boné Adidas', 3, 12, 35.00, 'https://assets.adidas.com/images/w_600,f_auto,q_auto/a2b956a1c41340f9b6dfafc201082ee6_9366/Bone_Baseball_Sarja_Algodao_3-Stripes_Preto_IB3242_01_standard.jpg', false),
+    ('Boné Adidas', 3, 12, 35.00, 'https://assets.adidas.com/images/w_600,f_auto,q_auto/a2b956a1c41340f9b6dfafc201082ee6_9366/Bone_Baseball_Sarja_Algodao_3-Stripes_Preto_IB3242_01_standard.jpg', true),
     ('Blusa de Moletom', 1, 7, 80.00, 'https://www.tocha.com.br/image/cache/data/1-Casual/Masculino/MOLETOM%20PTO-800x800.jpg', false),
     ('Sandália Havaianas', 2, 20, 30.00, 'https://d2kh0jmrbw4y83.cloudfront.net/Custom/Content/Products/37/65/37654_sandalias-havaianas-slim-logo-pop-up-prebra-3738-1264842_s2_637683449052254012.jpg', false),
     ('Óculos de Sol', 3, 14, 60.00, 'https://cdn.awsli.com.br/600x700/1559/1559198/produto/191006198/d785b20fb8.jpg', true),

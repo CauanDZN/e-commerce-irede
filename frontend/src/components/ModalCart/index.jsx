@@ -14,12 +14,12 @@ export default function ModalCart({ onClose }) {
   let listCart = [];
   let total = 0;
 
-  if (cart?.products) {
-    cart.products.forEach((product, index) => {
-      let productInfo = products?.find((item) => item.id === product.product_id);
+  if (cart?.produtos) {
+    cart.produtos.forEach((produto, index) => {
+      let productInfo = products?.find((item) => item.id === produto.id_produto);
       if (productInfo) {
-        listCart.push({ ...productInfo, quantidade: product.quantidade });
-        total += product.quantidade * parseFloat(productInfo.preco.replace(",", "."));
+        listCart.push({ ...productInfo, quantidade: produto.quantidade });
+        total += produto.quantidade * parseFloat(productInfo.preco.replace(",", "."));
       }
     });
   }
@@ -38,20 +38,19 @@ export default function ModalCart({ onClose }) {
   }, [onClose]);
 
   const handleEsvaziar = () => {
-    setCart({ products: [] });
+    setCart({ produtos: [] });
     navigate("/produtos");
     onClose();
   };
 
   const handleFinalizarCompra = async () => {
     try {
-      await fetch('http://localhost:3000/sales', {
+      const response = await fetch('http://localhost:3000/sales', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          data: new Date().toISOString().split('T')[0],
           items: listCart.map(item => ({
             id_usuario: user.id,
             id_produto: item.id,
@@ -60,13 +59,23 @@ export default function ModalCart({ onClose }) {
           }))
         })
       });
-      setCart({ products: [] });
-      navigate("/");
+  
+      // Verificar se a requisição foi bem-sucedida
+      if (response.ok) {
+        const data = await response.json();
+        const saleId = data.saleId;
+        setCart({ produtos: [] });
+        navigate("/");
+        alert(`Compra finalizada com sucesso! ID da venda: ${saleId}`);
+      } else {
+        throw new Error('Erro ao finalizar compra');
+      }
     } catch (error) {
       console.error('Erro ao finalizar compra:', error);
-      toast.error("Erro ao finalizar compra");
+      alert("Erro ao finalizar compra");
     }
-  };  
+  };
+  
 
   return (
     <div className="bg-zinc-50 text-black w-72 p-7 rounded-lg absolute top-2 right-2 z-50 shadow" ref={modalRef}>

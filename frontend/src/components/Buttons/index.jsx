@@ -13,8 +13,8 @@ export default function Buttons() {
 
   useEffect(() => {
     let total = 0;
-    if (cart && cart.products) {
-      cart.products.forEach((product) => {
+    if (cart && cart.produtos) {
+      cart.produtos.forEach((product) => {
         total += product.quantidade;
       });
     }

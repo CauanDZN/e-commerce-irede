@@ -4,6 +4,7 @@ const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
 const saleRoutes = require('./routes/saleRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 const app = express();
 const port = 3000;
@@ -15,5 +16,6 @@ app.use('/auth', authRoutes);
 app.use('/products', productRoutes);
 app.use('/users', userRoutes);
 app.use('/sales', saleRoutes);
+app.use('/orders', orderRoutes);
 
 app.listen(port, () => console.log(`Servidor inicializado na porta: ${port}`));

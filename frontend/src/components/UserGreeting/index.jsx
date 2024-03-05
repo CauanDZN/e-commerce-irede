@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../context/userContext";
+import { CartContext } from "../../context/cartContext";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export function UserGreeting({ user }) {
   const { setUser } = useContext(UserContext);
+  const { setCart } = useContext(CartContext);
 
   const handleLogout = () => {
     const toastId = 'logout-toast';
@@ -15,6 +17,7 @@ export function UserGreeting({ user }) {
     });
     
     setUser(null);
+    setCart([]);
   };
 
   return (
