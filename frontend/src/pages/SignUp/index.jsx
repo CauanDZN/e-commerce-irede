@@ -1,12 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import imgLogo from "../../assets/logo-e-rede.png";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../context/userContext";
+import { jwtDecode } from "jwt-decode";
 
 export default function SignUp() {
     const navigate = useNavigate();
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const { setUser } = useContext(UserContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,6 +30,10 @@ export default function SignUp() {
             });
 
             if (response.ok) {
+                const data = await response.json();
+                const decoded = jwtDecode(data.token);
+                localStorage.setItem("token", data.token);
+                setUser(decoded);
                 navigate("/");
             } else {
                 console.error('Erro ao cadastrar usuário');

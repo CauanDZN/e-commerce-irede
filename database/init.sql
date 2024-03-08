@@ -6,7 +6,7 @@ BEGIN
             nome VARCHAR(100) NOT NULL,
             email VARCHAR(100) UNIQUE NOT NULL,
             senha_hash VARCHAR(100) NOT NULL,
-            avatar TEXT
+            avatar TEXT DEFAULT 'https://static.vecteezy.com/system/resources/previews/009/267/561/original/user-icon-design-free-png.png'
         );
     END IF;
 END $$;
